@@ -1,0 +1,47 @@
+@startuml
+
+
+top to bottom direction
+
+class TodoItem {
+  + TodoItem(String, boolean): 
+  + TodoItem(String): 
+  - completed: boolean
+  - title: String
+  + toggleCompleted(): void
+  + getTitle(): String
+  + isCompleted(): boolean
+}
+class TodoList {
+  + TodoList(): 
+  - items: List<TodoItem>
+  + toggleCompleted(int): void
+  + getSize(): int
+  + addItem(String, boolean): void
+  + isCompleted(int): boolean
+  + addItem(String): void
+  + getTitle(int): String
+  + removeItem(int): void
+}
+class TodoListPanel {
+  + TodoListPanel(): 
+  - textField: JTextField
+  + SAVEFILE_TODO_LIST_JSON: String
+  - textModel: DefaultListModel<String>
+  - todoList: TodoList
+  + DONE: String
+  + SAVE_DIR: String
+  - loadJsonFromFile(): void
+  - toggleDone(JList<String>): void
+  - updateTodoModel(): void
+  - ensureJsonExists(): void
+  - selectItem(JList<String>): void
+  - readJsonFile(): JSONArray
+  - save(): void
+  - deleteItem(JList<String>): void
+  + actionPerformed(ActionEvent): void
+}
+
+TodoList       -->  TodoItem
+TodoListPanel  -->  TodoList
+@enduml
